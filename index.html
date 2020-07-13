@@ -1,0 +1,180 @@
+<html>
+
+<head>
+  <title>alert-timer</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    body {
+      padding-top: 30px;
+    }
+
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+
+    .now-time {
+      margin-left: 15px;
+    }
+
+    .m-t {
+      margin-top: 10px;
+    }
+
+    .m-b {
+      margin-bottom: 10px;
+    }
+
+    .m-l {
+      margin-left: 20px;
+    }
+
+    .m-r {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h3>当前时间<span class="now-time"></span></h3>
+  </div>
+  <div class="m-t m-b">
+    <h3 class="m-b">设置计时</h3>
+    <div class="setter">
+      <select name="hour" id="hour" class="m-r">
+        <option value="">--</option>
+      </select>时
+
+      <select name="minute" id="minute" class="m-r">
+        <option value="">--</option>
+      </select>分
+
+      <select name="second" id="second" class="m-r">
+        <option value="">--</option>
+      </select>秒
+      <button class="set-timer">设置</button>
+    </div>
+  </div>
+  <div class="reset-outer">
+    <h3>剩余时间<span class="m-l reset-time">--</span></h3>
+  </div>
+  <script>
+    const hMSeconds = 60 * 60 * 1000
+    const mMSeconds = 60 * 1000
+    const sMSeconds = 1000
+    let globalTimer = null
+    let timerExFunc = () => { }
+
+    window.addEventListener("load", () => {
+      renderNowTime()
+      setOptions()
+      addListener()
+    })
+
+    function $(str) {
+      return document.querySelectorAll(str)[0]
+    }
+
+    function setOptions() {
+      ["hour", "minute", "second"].forEach((id) => {
+        let optionCount = 60
+        if (id === "hour") {
+          optionCount = 24
+        }
+        let str = ""
+
+        for (let i = 0; i <= optionCount; i++) {
+          str += `<option value="${i}">${i}</option>`
+        }
+        $(`#${id}`).innerHTML = str
+      })
+    }
+
+    function formateDate(date) {
+      let res = {
+        h: 0,
+        m: 0,
+        s: 0
+      }
+      if (date instanceof Date) {
+        res = {
+          h: date.getHours(),
+          m: date.getMinutes(),
+          s: date.getSeconds()
+        }
+      } else {
+
+        const h = date >= hMSeconds ? parseInt(date / hMSeconds) : 0,
+          m = date - h * hMSeconds >= mMSeconds ? parseInt((date - h * hMSeconds) / mMSeconds) : 0,
+          s = date - h * hMSeconds - m * mMSeconds >= sMSeconds ? parseInt((date - h * hMSeconds - m * mMSeconds) / sMSeconds) : 0
+        res = {
+          h,
+          m,
+          s,
+        }
+      }
+
+      // 补充0
+      for (let key in res) {
+        if (res[key] < 10) {
+          res[key] = "0" + res[key]
+        }
+      }
+
+      return `${res.h}:${res.m}:${res.s}`
+    }
+
+    function renderNowTime() {
+      function call() {
+        $(".now-time").innerHTML = formateDate(new Date())
+        timerExFunc && timerExFunc()
+      }
+
+      call()
+      setInterval(() => {
+        call()
+      }, 1000);
+    }
+
+    function renderRestTime(date) {
+      $(".reset-time").innerHTML = formateDate(date)
+    }
+
+
+    function getSelectValue() {
+      return {
+        h: $("#hour").value,
+        m: $("#minute").value,
+        s: $("#second").value
+      }
+    }
+
+    function addListener() {
+      $(".set-timer").addEventListener("click", () => {
+        const selectValue = getSelectValue()
+        const now = Date.now()
+        const duration = selectValue.h * hMSeconds + selectValue.m * mMSeconds + selectValue.s * sMSeconds
+        const finalDate = now + duration
+
+        timerExFunc = () => {
+          renderRestTime(finalDate - Date.now())
+        }
+
+        setTimeout(() => {
+          timerExFunc = () => { }
+          alert("done")
+        }, duration)
+      })
+    }
+
+  </script>
+</body>
+
+</html>
