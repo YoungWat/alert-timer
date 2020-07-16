@@ -104,6 +104,13 @@
         m: 0,
         s: 0
       }
+
+      let nFlag = false
+      if (date < 0) {
+        nFlag = true
+        date = Math.abs(date)
+      }
+
       if (date instanceof Date) {
         res = {
           h: date.getHours(),
@@ -111,10 +118,10 @@
           s: date.getSeconds()
         }
       } else {
-
         const h = date >= hMSeconds ? parseInt(date / hMSeconds) : 0,
           m = date - h * hMSeconds >= mMSeconds ? parseInt((date - h * hMSeconds) / mMSeconds) : 0,
           s = date - h * hMSeconds - m * mMSeconds >= sMSeconds ? parseInt((date - h * hMSeconds - m * mMSeconds) / sMSeconds) : 0
+
         res = {
           h,
           m,
@@ -129,6 +136,9 @@
         }
       }
 
+      if (nFlag) {
+        res.h = `-${res.h}`
+      }
       return `${res.h}:${res.m}:${res.s}`
     }
 
@@ -169,7 +179,7 @@
         }
 
         setTimeout(() => {
-          timerExFunc = () => { }
+          // timerExFunc = () => { }
           alert("done")
         }, duration)
       })
