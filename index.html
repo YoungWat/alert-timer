@@ -73,6 +73,10 @@
     let globalTimer = null
     let timerExFunc = () => { }
 
+    window.onbeforeunload = (ev) => {
+      return ""
+    }
+
     window.addEventListener("load", () => {
       renderNowTime()
       setOptions()
