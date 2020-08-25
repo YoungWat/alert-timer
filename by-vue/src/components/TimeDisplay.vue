@@ -3,19 +3,20 @@
 </template>
 
 <script>
-import utils from "../common/utils";
+import utils from "../common/utils"
 export default {
   name: "TimeDisplay",
   props: {
-    date: {},
+    date: {
+      default: 0,
+    },
   },
   computed: {
     fomatedDate() {
-      return this.date instanceof Date
-        ? utils.formateDate(this.date)
-        : utils.transMs2Date(this.date);
+      const info = utils.parseDate(this.date)
+      return `${info.flag}${info.h}:${info.m}:${info.s}`
     },
   },
-};
+}
 </script>
 <style></style>

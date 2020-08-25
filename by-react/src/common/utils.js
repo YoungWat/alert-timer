@@ -19,13 +19,16 @@ const utils = {
   // 毫秒转时间
   transMs2Date: mseconds => {
     const parseNumber = n => {
+      console.log("n ",n)
       return utils.pad(parseInt(n))
     }
 
     let isNeg = mseconds < 0
 
-    mseconds = Math.abs(mseconds)
+    console.log("mseconds ",mseconds)
 
+    mseconds = Math.abs(mseconds)
+    
     const h = parseNumber(mseconds / msSecondsH)
     const m = parseNumber((mseconds - h * msSecondsH) / msSecondsM)
     const s = parseNumber(

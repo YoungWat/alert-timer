@@ -1,0 +1,34 @@
+// common
+@mixin time-margin {
+  margin-right: 10px;
+}
+@mixin margin-center {
+  margin: 0 auto;
+}
+@mixin text-center {
+  text-align: center;
+}
+
+.now-time-wrapper,
+.left-time-wrapper,
+.time-setter-wrapper {
+  @include text-center;
+  margin-top: 10px;
+}
+
+.now-time,
+.left-time {
+  @include time-margin;
+}
+
+.now-time-wrapper {
+}
+
+.time-setter-wrapper {
+  .time-setter {
+    margin: 10px 0;
+  }
+}
+
+.left-time-wrapper {
+}
