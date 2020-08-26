@@ -6,7 +6,13 @@ const TimeSetter = ({
   maxHour = 24,
   maxMinute = 60,
   maxSecond = 60,
+  onChange,
   children,
+  info = {
+    h: 0,
+    m: 0,
+    s: 0,
+  },
 }) => {
   const selectMap = [
     {
@@ -25,12 +31,28 @@ const TimeSetter = ({
       text: "秒",
     },
   ]
+
+  let nowInfo = {
+    ...{},
+    ...info,
+  }
+
+  const onChangeHandler = (e, key) => {
+    nowInfo[key] = Number(e.target.value)
+    onChange && onChange(nowInfo)
+  }
+
   return (
     <section className="time-setter">
       {selectMap.map((item, index) => {
         return (
           <Fragment key={item.key}>
-            <select>
+            <select
+              onChange={(e) => {
+                onChangeHandler(e, item.key)
+              }}
+              value={info[item.key]}
+            >
               {new Array(item.max).fill("").map((n, idx) => {
                 return (
                   <option key={idx} value={idx}>
