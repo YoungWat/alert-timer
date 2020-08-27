@@ -2,9 +2,8 @@
   <section class="time-setter">
     <template v-for="(item, index) in selectMap">
       <select
-        :ref="item.key"
         :key="item.key"
-        @input="
+        @change="
           (e) => {
             selectChangeHandler(item.key, e.target.value)
           }
@@ -40,20 +39,18 @@ export default {
     value: {},
   },
   data() {
-    return {}
+    return {
+      nowInfo: {
+        ...{},
+        ...this.value,
+      },
+    }
   },
   methods: {
     selectChangeHandler(key, value) {
-      const info = {
-        h: 0,
-        m: 0,
-        s: 0,
-      }
-      ;["h", "m", "s"].forEach((key) => {
-        info[key] = Number(this.$refs[key][0].value)
-      })
+      this.nowInfo[key] = Number(value)
 
-      this.$emit("input", info)
+      this.$emit("input", this.nowInfo)
     },
   },
   computed: {

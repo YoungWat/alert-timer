@@ -47,9 +47,16 @@ class App extends Component {
       leftTime: utils.transInfo2DateMs(this.state.timeSetterInfo),
     })
     tickCb = () => {
-      this.setState({
-        leftTime: this.state.leftTime - 1000,
-      })
+      this.setState(
+        {
+          leftTime: this.state.leftTime - 1000,
+        },
+        () => {
+          if (this.state.leftTime === 0) {
+            alert("done")
+          }
+        }
+      )
     }
   }
 

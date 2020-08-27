@@ -34,7 +34,7 @@ export default {
       timerStartDate: {
         h: 0,
         m: 0,
-        s: 0,
+        s: 3,
       },
     }
   },
@@ -54,6 +54,9 @@ export default {
       this.leftTimeMs = utils.transInfo2DateMs(this.timerStartDate)
       tickCb = () => {
         this.leftTimeMs = this.leftTimeMs - 1000
+        if (this.leftTimeMs === 0) {
+          alert("done")
+        }
       }
     },
   },
