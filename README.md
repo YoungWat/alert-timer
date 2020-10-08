@@ -4,3 +4,4 @@
 ![avatar](./demo_pic.jpg)
 
 # 使用
+https://youngwat.github.io/alert-timer/index.html
