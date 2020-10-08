@@ -1,1 +1,6 @@
-http://youngwat.tk/alert-timer/index.html
+# alert-timer
+设定时间倒计时结束alert弹窗提醒的工具
+
+![avatar](./demo_pic.jpg)
+
+# 使用
