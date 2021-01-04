@@ -50,6 +50,7 @@ class App extends Component {
     tickCb = null
     this.setState({
       leftTime: null,
+      timeSetterInfo: utils.formateInfo(0),
     })
   }
   componentDidMount = () => {
