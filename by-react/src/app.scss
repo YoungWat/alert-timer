@@ -13,7 +13,7 @@
 .left-time-wrapper,
 .time-setter-wrapper {
   @include text-center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .now-time,
@@ -21,14 +21,26 @@
   @include time-margin;
 }
 
-.now-time-wrapper {
+.now-time-wrapper,
+.left-time-wrapper {
+  font-size: 20px;
 }
 
 .time-setter-wrapper {
   .time-setter {
-    margin: 10px 0;
+    margin: 20px 0;
   }
 }
 
 .left-time-wrapper {
+}
+
+.control-btn-list {
+  margin-top: 10px;
+  button {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
