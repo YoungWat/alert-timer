@@ -55,6 +55,12 @@ class App extends Component {
   }
   componentDidMount = () => {
     this.tickTime()
+
+    window.onbeforeunload = (event) => {
+      if (event) {
+        event.returnValue = "关闭提示"
+      }
+    }
   }
 
   clickSetterHandler = () => {
