@@ -29,6 +29,7 @@ class App extends Component {
         s: 0,
       },
       pauseStatus: 1,
+      quickTimeSetterLists: [{ m: 5 }, { m: 10 }, { m: 30 }, { h: 1 }],
     }
   }
 
@@ -112,6 +113,7 @@ class App extends Component {
         <div className="time-setter-wrapper">
           <div>设置计时</div>
           <QuickTimeSetter
+            lists={this.state.quickTimeSetterLists}
             onSetTime={(info) => {
               this.setState({
                 timeSetterInfo: utils.transMs2Date(

@@ -5,7 +5,7 @@ import utils from "../../common/utils"
 import "./index.scss"
 
 const QuickTimeSetter = (props) => {
-  const { lists = [{ m: 10 }, { m: 30 }, { h: 1 }], onSetTime } = props
+  const { lists = [], onSetTime } = props
 
   return (
     <div className="quick-time-setter">
