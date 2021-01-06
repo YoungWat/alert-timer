@@ -4,7 +4,7 @@ const { readFileSync, writeFileSync } = require("fs")
 const path = require("path")
 
 const execShell = (string) => {
-  return execSync(string, { stdio: "inherit" })
+  return execSync(string, { stdio: "inherit", cwd: __dirname })
 }
 
 const build = () => {
@@ -40,7 +40,7 @@ const commitAndPush = () => {
   console.log(`commit`)
   execShell(`git add -A`)
   execShell(`git commit -m "chore: page auto pub ${new Date()}"`)
-  // execShell("git push")
+  execShell("git push")
 }
 
 build()
